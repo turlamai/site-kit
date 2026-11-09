@@ -31,6 +31,8 @@ fi
 # 2/3. Conventional locations.
 if [[ -z "$TARGET" && -f "$REPO/docs/index.html" ]]; then TARGET="$REPO/docs"; fi
 if [[ -z "$TARGET" && -f "$REPO/site/index.html" ]]; then TARGET="$REPO/site"; fi
+# 4. Root-served sites (portal): index.html + CNAME at the repo root.
+if [[ -z "$TARGET" && -f "$REPO/index.html" && -f "$REPO/CNAME" ]]; then TARGET="$REPO"; fi
 
 if [[ -z "$TARGET" ]]; then
     echo "error: no site directory found in $REPO (expected docs/ or site/ with index.html)" >&2

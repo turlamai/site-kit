@@ -45,7 +45,8 @@ def main():
     else:
         if m.group(1) != repo_name:
             warn(f'data-kit-id="{m.group(1)}" != repo name "{repo_name}"')
-        theme_key = f"{m.group(1)}-theme"
+        theme_key = re.search(r'data-kit-theme-key="([^"]+)"', html)
+        theme_key = theme_key.group(1) if theme_key else f"{m.group(1)}-theme"
         if theme_key not in html:
             warn(f"theme pre-paint snippet does not reference '{theme_key}'")
     if not re.search(r'<html[^>]*lang="', html):
