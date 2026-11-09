@@ -76,6 +76,9 @@
     /* ================= 2. I18N ================= */
     var I18N = (function () {
         var dicts = readJSON('kit-i18n') || { zh: {}, en: {} };
+        // Pages without a dictionary keep their own i18n machinery; the
+        // engine must stay fully inert so it never clobbers their text.
+        var hasDict = document.getElementById('kit-i18n') !== null;
         var lang = null;
 
         function detect() {
@@ -92,6 +95,7 @@
             return v === undefined ? key : v;
         }
         function apply() {
+            if (!hasDict) return;
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
             // Per-language document title and description (dict key "__meta__").
             var meta = dicts.__meta__ || null;
@@ -123,6 +127,11 @@
                 var value = t(nodes[i].getAttribute('data-i18n'));
                 nodes[i].textContent = value;
             }
+            var phNodes = document.querySelectorAll('[data-i18n-placeholder]');
+            for (var q = 0; q < phNodes.length; q++) {
+                var pv = t(phNodes[q].getAttribute('data-i18n-placeholder'));
+                if (pv) phNodes[q].setAttribute('placeholder', pv);
+            }
             var attrNodes = document.querySelectorAll('[data-i18n-attr]');
             for (var j = 0; j < attrNodes.length; j++) {
                 var attrs = (attrNodes[j].getAttribute('data-i18n-attr') || '').split(',');
@@ -136,7 +145,7 @@
             updateLangUI();
         }
         function setLang(next) {
-            if (next !== 'zh' && next !== 'en') return;
+            if (!hasDict || (next !== 'zh' && next !== 'en')) return;
             lang = next;
             storageSet(LANG_KEY, next);
             apply();
@@ -153,6 +162,7 @@
             if (label) label.textContent = lang === 'zh' ? '简体中文' : 'English';
         }
         function bind() {
+            if (!hasDict) return;
             lang = detect();
             apply();
             var wrap = document.querySelector('.kit-lang');
