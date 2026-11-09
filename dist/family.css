@@ -704,3 +704,7 @@ html[data-theme="dark"] .kit-card-icon { color: var(--kit-accent); }
 .kit-text-3 { color: var(--kit-text-3); }
 .kit-mono { font-family: var(--kit-font-mono); }
 .kit-hidden { display: none !important; }
+
+/* Accent word inside a split display headline */
+.kit-accent-word { color: var(--kit-accent-strong); }
+html[data-theme="dark"] .kit-accent-word { color: var(--kit-accent); }
