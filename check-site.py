@@ -88,12 +88,15 @@ def main():
                     fail(f"kit-i18n: '{lang}' dictionary missing")
             keys = set(re.findall(r'data-i18n(?:-key)?="([^"]+)"', html))
             # multi-page sites (generated digests, manuals) carry keys on
-            # their other pages — scan every html file in the site dir
+            # their other pages — scan every html file that runs on the kit
+            # engine. Pages with their own legacy engines (manual.html,
+            # guide.html) own their dictionaries and are skipped.
             for extra_page in site.rglob("*.html"):
                 if extra_page != index:
-                    keys |= set(re.findall(
-                        r'data-i18n(?:-key)?="([^"]+)"',
-                        extra_page.read_text(encoding="utf-8", errors="ignore")))
+                    ph = extra_page.read_text(encoding="utf-8", errors="ignore")
+                    if "family.js" in ph:
+                        keys |= set(re.findall(
+                            r'data-i18n(?:-key)?="([^"]+)"', ph))
             for key in sorted(keys):
                 for lang in ("zh", "en"):
                     d = dicts.get(lang) or {}
