@@ -87,6 +87,13 @@ def main():
                 if lang not in dicts:
                     fail(f"kit-i18n: '{lang}' dictionary missing")
             keys = set(re.findall(r'data-i18n(?:-key)?="([^"]+)"', html))
+            # multi-page sites (generated digests, manuals) carry keys on
+            # their other pages — scan every html file in the site dir
+            for extra_page in site.rglob("*.html"):
+                if extra_page != index:
+                    keys |= set(re.findall(
+                        r'data-i18n(?:-key)?="([^"]+)"',
+                        extra_page.read_text(encoding="utf-8", errors="ignore")))
             for key in sorted(keys):
                 for lang in ("zh", "en"):
                     d = dicts.get(lang) or {}
