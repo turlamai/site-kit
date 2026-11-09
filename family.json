@@ -1,0 +1,28 @@
+{
+    "sites": [
+        {"repo": "turlamai/turlamai.github.io", "url": "https://jrtx.site", "kind": "portal", "installer": false},
+        {"repo": "turlamai/fulcrum", "url": "https://fulcrum.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/taskly", "url": "https://taskly.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/movebit", "url": "https://movebit.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/termpilot", "url": "https://termpilot.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/booklight", "url": "https://booklight.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/podlens", "url": "https://podlens.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/hackdigest", "url": "https://hackdigest.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/payback", "url": "https://payback.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/regexmate", "url": "https://regexmate.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/keyward", "url": "https://keyward.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/threadly", "url": "https://threadly.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/syncpilot", "url": "https://syncpilot.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/publy", "url": "https://publy.jrtx.site", "kind": "product", "installer": true},
+        {"repo": "turlamai/pitboard", "url": "https://pitboard.jrtx.site", "kind": "product", "installer": false},
+        {"repo": "turlamai/rivet", "url": "https://rivet.jrtx.site", "kind": "framework", "installer": false},
+        {"repo": "turlamai/glaze", "url": "https://glaze.jrtx.site", "kind": "framework", "installer": false},
+        {"repo": "turlamai/permit", "url": "https://permit.jrtx.site", "kind": "framework", "installer": false},
+        {"repo": "turlamai/flashpilot", "url": "https://flashpilot.jrtx.site", "kind": "framework", "installer": true},
+        {"repo": "turlamai/relaypilot", "url": "https://relaypilot.jrtx.site", "kind": "framework", "installer": false},
+        {"repo": "turlamai/gptp-studio", "url": "https://gptp-studio.jrtx.site", "kind": "framework", "installer": true},
+        {"repo": "turlamai/autarx", "url": "https://autarx.jrtx.site", "kind": "framework", "installer": false},
+        {"repo": "turlamai/yinwang-archive", "url": "https://yinwang.jrtx.site", "kind": "content", "installer": false},
+        {"repo": "turlamai/racket-programming", "url": "https://racket.jrtx.site", "kind": "content", "installer": false}
+    ]
+}

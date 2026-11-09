@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  site-kit template — the canonical family page skeleton.
+  Copy this, then replace the placeholder copy per product.
+  Rules:
+   - data-i18n goes on LEAF elements only (textContent is replaced).
+   - zh copy is canonical in the dictionaries; en mirrors it.
+   - data-kit-id must match the repo/site id (drives storage keys).
+   - For library pages without installers, delete #kit-download and
+     present a raco pkg install block instead.
+   ============================================================ -->
+<html lang="zh-CN" data-kit-id="example">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example — placeholder product title</title>
+    <meta name="description" content="One-sentence product description for SEO.">
+    <link rel="canonical" href="https://example.jrtx.site/">
+    <meta name="theme-color" content="#D97757">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Example">
+    <meta property="og:title" content="Example — placeholder">
+    <meta property="og:description" content="One-sentence product description.">
+    <meta property="og:url" content="https://example.jrtx.site/">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Theme pre-paint: apply before the stylesheet paints, no flash. -->
+    <script>
+        (function () {
+            var t;
+            try { t = localStorage.getItem('example-theme'); } catch (e) { }
+            if (t !== 'dark' && t !== 'light') {
+                t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,...">
+    <link rel="stylesheet" href="family.css">
+    <link rel="stylesheet" href="site.css"><!-- per-site sections only (product art, unique layouts) -->
+    <link rel="preload" href="fonts/newsreader-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+    <script src="family.js" defer></script>
+</head>
+
+<body>
+    <header class="kit-nav">
+        <div class="kit-container kit-nav-inner">
+            <a class="kit-brand" href="/">
+                <svg class="kit-brand-mark" viewBox="0 0 24 24" fill="var(--kit-accent)"><rect width="24" height="24" rx="6" /></svg>
+                <span data-i18n="nav.brand">Example</span>
+            </a>
+            <nav class="kit-nav-links">
+                <a href="#features" data-i18n="nav.features">特性</a>
+                <a href="#platforms" data-i18n="nav.platforms">平台</a>
+                <a href="#start" data-i18n="nav.start">开始使用</a>
+                <a href="https://github.com/turlamai/example" data-i18n="nav.github">GitHub</a>
+            </nav>
+            <div class="kit-nav-actions">
+                <div class="kit-lang">
+                    <button class="kit-lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2" /><path d="M1.8 8h12.4M8 1.8c-4.6 4-4.6 8.4 0 12.4 4.6-4 4.6-8.4 0-12.4z" /></svg>
+                        <span class="kit-lang-current">简体中文</span>
+                    </button>
+                    <ul class="kit-lang-menu">
+                        <li><button type="button" data-kit-lang="zh">简体中文</button></li>
+                        <li><button type="button" data-kit-lang="en">English</button></li>
+                    </ul>
+                </div>
+                <button class="kit-icon-btn kit-theme-toggle" type="button" aria-pressed="false" aria-label="Theme">
+                    <svg class="kit-icon-sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="4" /><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2M4 4l1.4 1.4M14.6 14.6L16 16M16 4l-1.4 1.4M5.4 14.6L4 16" /></svg>
+                    <svg class="kit-icon-moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16.5 12.2A7 7 0 0 1 7.8 3.5a7 7 0 1 0 8.7 8.7z" /></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        /* icon visibility per theme (site.css may override) */
+        html[data-theme="light"] .kit-icon-moon { display: none; }
+        html[data-theme="dark"] .kit-icon-sun { display: none; }
+    </style>
+
+    <main>
+        <!-- Hero -->
+        <section class="kit-hero">
+            <div class="kit-container">
+                <span class="kit-eyebrow" data-i18n="hero.eyebrow">一句话定位 · macOS · Windows · Linux</span>
+                <h1><span data-i18n="hero.h1">产品的价值主张,一句话说透。</span></h1>
+                <p class="kit-lead" data-i18n="hero.lead">两到三句展开:它解决什么问题、为什么值得立刻试。本地优先、隐私与免费要点放在这里。</p>
+                <div class="kit-btn-row">
+                    <div class="kit-dl">
+                        <a class="kit-btn kit-btn--primary" data-kit-dl-primary
+                            href="https://github.com/turlamai/example/releases/latest">
+                            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2.5v10M6 9l4 4 4-4M3.5 16.5h13" /></svg>
+                            <span class="kit-dl-label" data-i18n="dl.generic">获取 Example</span>
+                        </a>
+                        <button class="kit-dl-caret" type="button" aria-haspopup="true" aria-expanded="false" aria-label="All platforms">
+                            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5.5L7 9.5l4-4" /></svg>
+                        </button>
+                        <ul class="kit-dl-menu">
+                            <li><a href="https://github.com/turlamai/example/releases/latest" data-kit-dl="mac"><span class="kit-dl-os" data-i18n="dl.mac">macOS 版</span><span class="kit-dl-kind">.dmg</span></a></li>
+                            <li><a href="https://github.com/turlamai/example/releases/latest" data-kit-dl="win"><span class="kit-dl-os" data-i18n="dl.win">Windows 版</span><span class="kit-dl-kind">.msi</span></a></li>
+                            <li><a href="https://github.com/turlamai/example/releases/latest" data-kit-dl="linux"><span class="kit-dl-os" data-i18n="dl.linux">Linux 版</span><span class="kit-dl-kind">.AppImage</span></a></li>
+                            <li class="kit-dl-note kit-hidden" data-i18n="dl.note">移动端与未知平台请前往 Releases 页面选取对应安装包。</li>
+                        </ul>
+                    </div>
+                    <a class="kit-btn kit-btn--secondary" href="#features" data-i18n="hero.cta-secondary">了解更多</a>
+                </div>
+                <p class="kit-hero-meta"><span class="kit-badge" data-i18n="hero.badge">开发预览 · 免费核心</span></p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="kit-section" id="features">
+            <div class="kit-container">
+                <span class="kit-kicker" data-i18n="features.kicker">为什么是 Example</span>
+                <h2 class="kit-h2" data-i18n="features.title">章节标题:产品最想让人记住的一句。</h2>
+                <p class="kit-lead" data-i18n="features.lead">章节导语,一两句收住,细节交给卡片。</p>
+                <div class="kit-grid kit-grid--3" style="margin-top: 44px;">
+                    <div class="kit-card">
+                        <span class="kit-card-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h14M3 10h14M3 15h9" /></svg></span>
+                        <h3 data-i18n="features.f1.title">特性一</h3>
+                        <p data-i18n="features.f1.body">两句话讲清这个特性带来的具体好处。</p>
+                    </div>
+                    <div class="kit-card">
+                        <span class="kit-card-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="14" height="14" rx="3" /><path d="M7 12l2.5-2.5L7 7M11 13h3" /></svg></span>
+                        <h3 data-i18n="features.f2.title">特性二</h3>
+                        <p data-i18n="features.f2.body">两句话讲清这个特性带来的具体好处。</p>
+                    </div>
+                    <div class="kit-card">
+                        <span class="kit-card-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3l7 3.5v4c0 4-3 6.2-7 7-4-.8-7-3-7-7v-4L10 3z" /></svg></span>
+                        <h3 data-i18n="features.f3.title">特性三</h3>
+                        <p data-i18n="features.f3.body">两句话讲清这个特性带来的具体好处。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platforms -->
+        <section class="kit-section kit-section--alt" id="platforms">
+            <div class="kit-container">
+                <span class="kit-kicker" data-i18n="platforms.kicker">跨平台</span>
+                <h2 class="kit-h2" data-i18n="platforms.title">平台策略一句话。</h2>
+                <p class="kit-lead" data-i18n="platforms.lead">说明各平台形态与一致性承诺。</p>
+                <div class="kit-platforms" style="margin-top: 36px;">
+                    <span class="kit-platform-chip"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M13.7 10.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7C5.5 6 4.2 6.8 3.5 8c-1.4 2.5-.4 6.2 1 8.2.7 1 1.5 2.1 2.5 2 1-.1 1.4-.7 2.6-.7s1.6.7 2.6.6c1.1-.1 1.8-1 2.4-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2-.7-2-3.2zM11.7 4.6c.5-.7.9-1.6.8-2.6-.8 0-1.8.6-2.3 1.2-.5.6-1 1.6-.8 2.5.9.1 1.8-.5 2.3-1.1z" /></svg>macOS <small>12+</small></span>
+                    <span class="kit-platform-chip"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M2.5 4.5h7v7h-7zM10.5 4.5h7v7h-7zM2.5 12.5h7v7h-7zM10.5 12.5h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.4" /></svg>Windows <small>10+</small></span>
+                    <span class="kit-platform-chip"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 2.8c-2.2 0-4 1.8-4 4v6.4c0 2.2 1.8 4 4 4s4-1.8 4-4V6.8c0-2.2-1.8-4-4-4z" /><path d="M6 9h8M6 12h8" /></svg>Linux <small>.AppImage</small></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting started -->
+        <section class="kit-section" id="start">
+            <div class="kit-container">
+                <span class="kit-kicker" data-i18n="start.kicker">开始使用</span>
+                <h2 class="kit-h2" data-i18n="start.title">三步上手。</h2>
+                <div class="kit-steps" style="margin-top: 44px;">
+                    <div class="kit-step">
+                        <h3 data-i18n="start.s1.title">下载安装</h3>
+                        <p data-i18n="start.s1.body">从上方按钮获取对应平台的安装包。</p>
+                    </div>
+                    <div class="kit-step">
+                        <h3 data-i18n="start.s2.title">首次配置</h3>
+                        <p data-i18n="start.s2.body">打开应用,完成一次性设置。</p>
+                    </div>
+                    <div class="kit-step">
+                        <h3 data-i18n="start.s3.title">日常使用</h3>
+                        <p data-i18n="start.s3.body">一句话说明核心日常动作。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="kit-footer">
+        <div class="kit-container">
+            <div class="kit-footer-grid">
+                <div>
+                    <a class="kit-brand" href="/">
+                        <svg class="kit-brand-mark" viewBox="0 0 24 24" fill="var(--kit-accent)"><rect width="24" height="24" rx="6" /></svg>
+                        <span data-i18n="nav.brand">Example</span>
+                    </a>
+                    <p class="kit-footer-tagline" data-i18n="footer.tagline">一句话产品定位。</p>
+                </div>
+                <div>
+                    <h4 data-i18n="footer.product">产品</h4>
+                    <ul>
+                        <li><a href="#features" data-i18n="nav.features">特性</a></li>
+                        <li><a href="#platforms" data-i18n="nav.platforms">平台</a></li>
+                        <li><a href="https://github.com/turlamai/example/releases" data-i18n="footer.releases">版本发布</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-i18n="footer.family">家族</h4>
+                    <ul>
+                        <li><a href="https://jrtx.site/" data-i18n="footer.portal">全部产品</a></li>
+                        <li><a href="https://rivet.jrtx.site/">Rivet</a></li>
+                        <li><a href="https://glaze.jrtx.site/">Glaze</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-i18n="footer.legal">条款</h4>
+                    <ul>
+                        <li><a href="https://github.com/turlamai/example/blob/main/LICENSE" data-i18n="footer.license">许可协议</a></li>
+                        <li><a href="https://github.com/turlamai/example" data-i18n="nav.github">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="kit-footer-bottom">
+                <span data-i18n="footer.copyright">© 2026 turlamai · 本地优先,隐私默认。</span>
+                <span class="kit-mono">site-kit v1.0.0</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dictionaries: zh canonical, en complete. Keys used by family.js:
+         nav.*, hero.*, dl.{mac,win,linux,generic,note}, features.*, platforms.*, start.*, footer.* -->
+    <script type="application/json" id="kit-i18n">
+    {
+        "zh": {
+            "nav.brand": "Example",
+            "nav.features": "特性", "nav.platforms": "平台", "nav.start": "开始使用", "nav.github": "GitHub",
+            "hero.eyebrow": "一句话定位 · macOS · Windows · Linux",
+            "hero.h1": "产品的价值主张,一句话说透。",
+            "hero.lead": "两到三句展开:它解决什么问题、为什么值得立刻试。本地优先、隐私与免费要点放在这里。",
+            "hero.cta-secondary": "了解更多",
+            "hero.badge": "开发预览 · 免费核心",
+            "dl.mac": "macOS 版", "dl.win": "Windows 版", "dl.linux": "Linux 版",
+            "dl.generic": "获取 Example", "dl.note": "移动端与未知平台请前往 Releases 页面选取对应安装包。",
+            "features.kicker": "为什么是 Example",
+            "features.title": "章节标题:产品最想让人记住的一句。",
+            "features.lead": "章节导语,一两句收住,细节交给卡片。",
+            "features.f1.title": "特性一", "features.f1.body": "两句话讲清这个特性带来的具体好处。",
+            "features.f2.title": "特性二", "features.f2.body": "两句话讲清这个特性带来的具体好处。",
+            "features.f3.title": "特性三", "features.f3.body": "两句话讲清这个特性带来的具体好处。",
+            "platforms.kicker": "跨平台", "platforms.title": "平台策略一句话。", "platforms.lead": "说明各平台形态与一致性承诺。",
+            "start.kicker": "开始使用", "start.title": "三步上手。",
+            "start.s1.title": "下载安装", "start.s1.body": "从上方按钮获取对应平台的安装包。",
+            "start.s2.title": "首次配置", "start.s2.body": "打开应用,完成一次性设置。",
+            "start.s3.title": "日常使用", "start.s3.body": "一句话说明核心日常动作。",
+            "footer.tagline": "一句话产品定位。",
+            "footer.product": "产品", "footer.family": "家族", "footer.legal": "条款",
+            "footer.releases": "版本发布", "footer.portal": "全部产品", "footer.license": "许可协议",
+            "footer.copyright": "© 2026 turlamai · 本地优先,隐私默认。"
+        },
+        "en": {
+            "nav.brand": "Example",
+            "nav.features": "Features", "nav.platforms": "Platforms", "nav.start": "Get started", "nav.github": "GitHub",
+            "hero.eyebrow": "One-line positioning · macOS · Windows · Linux",
+            "hero.h1": "The value proposition, in one sentence.",
+            "hero.lead": "Two or three sentences: what problem it solves and why it is worth trying now. Local-first, privacy and free-tier points belong here.",
+            "hero.cta-secondary": "Learn more",
+            "hero.badge": "Development preview · Free core",
+            "dl.mac": "For macOS", "dl.win": "For Windows", "dl.linux": "For Linux",
+            "dl.generic": "Get Example", "dl.note": "On mobile or unknown platforms, pick the right package from the Releases page.",
+            "features.kicker": "Why Example",
+            "features.title": "The one sentence the product should be remembered by.",
+            "features.lead": "One or two sentences, then let the cards speak.",
+            "features.f1.title": "Feature one", "features.f1.body": "Two sentences on the concrete benefit.",
+            "features.f2.title": "Feature two", "features.f2.body": "Two sentences on the concrete benefit.",
+            "features.f3.title": "Feature three", "features.f3.body": "Two sentences on the concrete benefit.",
+            "platforms.kicker": "Cross-platform", "platforms.title": "Platform strategy in one line.", "platforms.lead": "Shapes per platform and the consistency promise.",
+            "start.kicker": "Get started", "start.title": "Up and running in three steps.",
+            "start.s1.title": "Download", "start.s1.body": "Get the package for your platform from the button above.",
+            "start.s2.title": "First run", "start.s2.body": "Open the app and finish one-time setup.",
+            "start.s3.title": "Daily use", "start.s3.body": "One sentence on the core daily action.",
+            "footer.tagline": "One-line product positioning.",
+            "footer.product": "Product", "footer.family": "Family", "footer.legal": "Legal",
+            "footer.releases": "Releases", "footer.portal": "All products", "footer.license": "License",
+            "footer.copyright": "© 2026 turlamai · Local-first, private by default."
+        }
+    }
+    </script>
+
+    <!-- Download config: only for pages that ship installers. -->
+    <script type="application/json" id="kit-download">
+    {
+        "repo": "turlamai/example",
+        "assets": {
+            "mac": "example-{v}-macos-{arch}.dmg",
+            "win": "example-{v}-windows-x64.msi",
+            "linux": "example-{v}-linux-{arch}.AppImage"
+        },
+        "archMap": { "linux": { "x64": "x86_64", "arm64": "aarch64" } }
+    }
+    </script>
+</body>
+
+</html>

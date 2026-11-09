@@ -1,0 +1,84 @@
+name: Family drift check
+
+# Weekly audit: every family site must serve byte-identical kit assets.
+# Drift means a site was hand-edited or fell behind — open an issue.
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare deployed kit assets with dist/
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, subprocess, urllib.request
+
+          kit = pathlib.Path(".")
+          version = (kit / "VERSION").read_text().strip()
+          sites = json.loads((kit / "family.json").read_text())["sites"]
+
+          def sha(b):
+              return hashlib.sha256(b).hexdigest()
+
+          # Local reference: dist files minus the injected stamp line.
+          def local(name):
+              raw = (kit / "dist" / name).read_bytes()
+              return sha(raw)
+
+          drift = []
+          for s in sites:
+              for name in ("family.css", "family.js"):
+                  url = s["url"] + "/" + name
+                  try:
+                      remote = urllib.request.urlopen(url, timeout=30).read()
+                  except Exception as e:
+                      drift.append(f"{s['repo']} {url}: unreachable ({e})")
+                      continue
+                  # Strip the sync.sh stamp line before comparing.
+                  text = remote.decode("utf-8", errors="ignore")
+                  text = text.replace(
+                      f"/* site-kit v{version} — generated from github.com/turlamai/site-kit; do not edit per-site. */\n",
+                      "", 1)
+                  # Older stamps may linger; strip any leading site-kit stamp line.
+                  lines = text.split("\n")
+                  if lines and lines[0].startswith("/* site-kit v"):
+                      text = "\n".join(lines[1:])
+                  if sha(text.encode()) != local(name):
+                      drift.append(f"{s['repo']} {url}: differs from dist/{name}")
+
+          if not drift:
+              print("All family sites match site-kit v" + version)
+              raise SystemExit(0)
+
+          body = ("Drift detected against site-kit v" + version + ":\n\n"
+                  + "\n".join("- " + d for d in drift)
+                  + "\n\nFix: re-run `site-kit/sync.sh <repo>` in each listed repo, "
+                    "commit and push; the Pages deploy will follow.")
+          subprocess.run(
+              ["gh", "issue", "list", "--state", "open", "--label", "site-kit-drift",
+               "--json", "number"],
+              check=True, capture_output=True)
+          existing = subprocess.run(
+              ["gh", "issue", "list", "--state", "open", "--label", "site-kit-drift",
+               "--json", "number"], capture_output=True, text=True)
+          if existing.stdout.strip() and json.loads(existing.stdout):
+              num = json.loads(existing.stdout)[0]["number"]
+              subprocess.run(["gh", "issue", "comment", str(num), "--body", body], check=True)
+          else:
+              subprocess.run(
+                  ["gh", "issue", "create", "--title",
+                   "Family sites drift from site-kit v" + version,
+                   "--body", body, "--label", "site-kit-drift"],
+                  check=True)
+          raise SystemExit(0)
+          PY
