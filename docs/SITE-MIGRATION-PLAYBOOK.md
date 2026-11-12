@@ -60,7 +60,7 @@ canonical skeleton, `docs/SITE-MIGRATION-PLAYBOOK.md` is this file).
      their own classes styled in `site.css` using kit tokens (`--kit-*`);
    - footer: `kit-footer` 4-column grid (brand+tagline / product / family
      [全部产品→jrtx.site, family links] / legal [GitHub, license]);
-     bottom bar `© 2026 TuringLambda AI` + `site-kit v1.0.1` mono stamp;
+     bottom bar `© 2026 TurLamAI` + `site-kit v1.0.1` mono stamp;
    - dictionaries: `<script type="application/json" id="kit-i18n">` with
      COMPLETE `zh` and `en` (every `data-i18n` key in BOTH dicts; zh canonical;
      en translated to product-grade English, not machine-literal);
