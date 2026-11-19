@@ -1,7 +1,5 @@
 # site-kit
 
-**支持：**[问题与反馈](https://github.com/turlamai/site-kit/issues) · [当前交付策略](https://github.com/turlamai/turlamai.github.io/blob/master/PORTFOLIO.zh-CN.md)
-
 `jrtx.site` 产品家族所有站点的单一真源:一套设计系统、一个 i18n 引擎、一个下载解析器——让家族看起来是一个成熟的商业产品,而不是二十多个手搜页面。
 
 [English](README.md)
