@@ -1,7 +1,5 @@
 # site-kit
 
-**Support:** [Issues & feedback](https://github.com/turlamai/site-kit/issues) · [Development policy](https://github.com/turlamai/turlamai.github.io/blob/master/PORTFOLIO.md)
-
 The single source of truth for every `jrtx.site` family product site: one design system, one i18n engine, one download resolver — so the family reads as one commercial product instead of twenty hand-rolled pages.
 
 [中文说明](README.zh-CN.md)
