@@ -49,12 +49,6 @@
       "installer": true
     },
     {
-      "repo": "turlamai/payback",
-      "url": "https://payback.jrtx.site",
-      "kind": "product",
-      "installer": true
-    },
-    {
       "repo": "turlamai/regexmate",
       "url": "https://regexmate.jrtx.site",
       "kind": "product",
