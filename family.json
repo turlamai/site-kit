@@ -49,12 +49,6 @@
       "installer": true
     },
     {
-      "repo": "turlamai/regexmate",
-      "url": "https://regexmate.jrtx.site",
-      "kind": "product",
-      "installer": true
-    },
-    {
       "repo": "turlamai/keyward",
       "url": "https://keyward.jrtx.site",
       "kind": "product",
