@@ -71,6 +71,14 @@ jobs:
           existing = subprocess.run(
               ["gh", "issue", "list", "--state", "open", "--label", "site-kit-drift",
                "--json", "number"], capture_output=True, text=True)
+          # The label must exist before an issue can carry it; create it on
+          # demand so a missing label never fails the whole check.
+          subprocess.run(
+              ["gh", "label", "create", "site-kit-drift",
+               "--color", "D93F0B",
+               "--description", "Deployed family site kit assets diverge from site-kit dist",
+               "--force"],
+              check=False, capture_output=True)
           if existing.stdout.strip() and json.loads(existing.stdout):
               num = json.loads(existing.stdout)[0]["number"]
               subprocess.run(["gh", "issue", "comment", str(num), "--body", body], check=True)
